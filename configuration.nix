@@ -20,9 +20,6 @@
   networking.hostName = "nixos-jchapuis"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Add the NixOS Manual on virtual console 8
-  nixosManual.showManual = true;
-
   # Select internationalisation properties.
   i18n = {
      consoleFont = "Lat2-Terminus16";

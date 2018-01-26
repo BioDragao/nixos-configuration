@@ -66,11 +66,9 @@ mkswap -L swap /dev/vg/swap
 ```
 
 ### Setup the wifi
-Disable the wpa_supplicant service that’s running, and run it yourself specifying the WPA credentials.
 
 ```
-systemctl stop wpa_supplicant.service
-wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
+nmcli dev wifi connect ssid_here password wifi_passwd_here
 ```
 
 ## Installation
@@ -83,18 +81,6 @@ mkdir /mnt/boot
 mount /dev/sdd2 /mnt/boot
 ```
 
-### Configuration generation
-Run this to generate config files:
-
-```
-nixos-generate-config --root /mnt
-```
-
-This creates two files in `/mnt/etc/nixos`:
-
-`configuration.nix`, a default config file. (You’ll be making changes to this a lot).
-`hardware-configuration.nix`, the results of a hardware scan (this is normally not to be edited, although as we'll see below we'll need to make a manual addition to this to support LUKS with an usb-keyboard).
-
 ### Fetching configuration 
 
 Get the configuration from GitHub:
@@ -105,11 +91,36 @@ git clone https://github.com/jchapuis/nixos-configuration.git /mnt/etc/nixos
 exit
 ```
 
+### Hardware configuration generation
+Run this to generate hardware config files:
+
+```
+nixos-generate-config --root /mnt
+```
+
+Normally, this creates two files in `/mnt/etc/nixos`:
+
+`configuration.nix`, a default config file - this is skipped since we already fetched that file from github
+`hardware-configuration.nix`, the results of a hardware scan (this is normally not to be edited, although as we'll see below we'll need to make a manual addition to this to support LUKS with an usb-keyboard).
+
 ### Hardware configuration
 Using full disk encryption with LUKS implies that we need to enter the password in Stage 1 of the bootsequence. Therefore, the ramdisk needs the proper modules to support usb keyboards. Here's the modification in `hardware-configuration.nix` that I had to manually do in order to get my Microsoft Natural Ergonomic keyboard to work:
 
 ```nix
  boot.initrd.kernelModules = [ "xhci_hcd" "xhci_pci" "ahci" "hid_microsoft" "dm_mod" "usbhid" "ata_generic" "ehci_pci" ];
+```
+
+### If you reboot during this process
+After you’ve created the partitions and LVM volumes, here’s a recap of everything you need to set up when you boot from the install media again.
+
+```bash
+cryptsetup luksOpen /dev/sdd3 enc-pv
+lvchange -a y /dev/vg/swap
+lvchange -a y /dev/vg/root
+mount /dev/vg/root /mnt
+mount /dev/sdd2 /mnt/boot
+swapon /dev/vg/swap
+nmcli dev wifi connect ssid_here password wifi_passwd_here
 ```
 
 ### Installing
@@ -125,3 +136,6 @@ Reboot to the new system:
 ```
 reboot
 ```
+
+## Troubleshooting
+Use the `journalctl` command to find out more about service errors, etc.
