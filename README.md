@@ -91,6 +91,8 @@ git clone https://github.com/jchapuis/nixos-configuration.git /mnt/etc/nixos
 exit
 ```
 
+Edit the main `configuration.nix` file to set the boot volume to the proper device (at the bottom of the file), as well as `users.nix` to configure users of the machine.
+
 ### Hardware configuration generation
 Run this to generate hardware config files:
 

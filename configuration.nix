@@ -11,6 +11,7 @@
       ./basics
       ./apps
       ./dev
+      ./users.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -74,6 +75,13 @@
     ];
   }; 
 
+  # Enable automatic garbage collection
+        gc = {
+          automatic = true;
+          dates = "daily";
+          options = "--delete-older-than 14d";
+        };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.jchapuis = {
      isNormalUser = true;
@@ -93,10 +101,10 @@
   boot.initrd.luks.devices = [
   {
     name = "root";
-    device = "/dev/sdb3";
+    device = "/dev/sda3";
     preLVM = true;
   }
   ];
 
-  boot.loader.grub.device = "/dev/sdb";
+  boot.loader.grub.device = "/dev/sda";
 }
