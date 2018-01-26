@@ -28,7 +28,7 @@
     redshift
   ];
 
-  services.config = { 
+  services = { 
     redshift = {
       enable = true;
 
