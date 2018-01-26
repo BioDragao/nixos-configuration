@@ -16,9 +16,6 @@
 
     kdeplasma-addons
 
-    # Bluetooth
-    bluedevil
-
     # Text editor
     # kate
 

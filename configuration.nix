@@ -41,7 +41,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
+ 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -76,21 +76,17 @@
   }; 
 
   # Enable automatic garbage collection
-        gc = {
-          automatic = true;
-          dates = "daily";
-          options = "--delete-older-than 14d";
-        };
+  gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 14d";
+  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.jchapuis = {
-     isNormalUser = true;
-     extraGroups = [
-      "audio" "disk" "docker" "networkmanager" "plugdev"
-      "systemd-journal" "wheel" "vboxusers" "video"
-      ];
-     uid = 1000;
-   };
+  # Enable manual on virtual console 8
+  services.nixosManual.showManual = true;
+
+  # Networking
+  networking.networkmanager.enable = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
