@@ -7,30 +7,38 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./desktop-environments
+      ./basics
+      ./apps
+      ./dev
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos-jchapuis"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Add the NixOS Manual on virtual console 8
+  nixosManual.showManual = true;
+
   # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+  i18n = {
+     consoleFont = "Lat2-Terminus16";
+     consoleKeyMap = "us";
+     defaultLocale = "en_US.UTF-8";
+   };
 
   # Set your time zone.
   time.timeZone = "Europe/Bern";
+  redshift = {
+      enable = true;
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-     wget vim chromium git vscode jetbrains.idea-community
-   ];
+      # Lausanne
+      latitude = "46.516";
+      longitude = "6.63282";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -50,7 +58,7 @@
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable the X11 windowing system.
   nixpkgs.config.allowUnfree = true;
@@ -61,15 +69,28 @@
 
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
-  
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+
+   # Fonts
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      corefonts
+      inconsolata
+      symbola
+      ubuntu_font_family
+      unifont
+      vistafonts
+    ];
+  }; 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.jchapuis = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" ];
+     extraGroups = [
+      "audio" "disk" "docker" "networkmanager" "plugdev"
+      "systemd-journal" "wheel" "vboxusers" "video"
+      ];
      uid = 1000;
    };
 

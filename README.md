@@ -15,7 +15,7 @@ Press F12 during the boot sequence and choose the USB Drive: the NixOS installer
 
 ## Formatting the host disk *(source: https://chris-martin.org/2015/installing-nixos)*
 
-![disklayout][https://github.com/jchapuis/nixos-configuration/disklayout.png]
+![disklayout](https://github.com/jchapuis/nixos-configuration/disklayout.png)
 
 There are three partitions:
 
@@ -91,7 +91,7 @@ Get the configuration from GitHub:
 
 ```
 nix-shell -p git 
-git clone https://github.com/jchapuis/nixos-configuration.git -w /mnt/etc/nixos 
+git clone https://github.com/jchapuis/nixos-configuration.git /mnt/etc/nixos 
 exit
 ```
 
@@ -115,18 +115,3 @@ Reboot to the new system:
 ```
 reboot
 ```
-
-After you have booted to the newly installed NixOS system, remove the hack
-symlink:
-
-```
-rm /mnt
-```
-
-Modify the worktree path in `/etc/nixos/.yadm/repo.git/config`. Regenerate alt
-symlinks.
-
-```
-yadm -Y /etc/nixos/.yadm alt
-```
-
