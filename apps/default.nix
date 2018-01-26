@@ -30,5 +30,11 @@
     # Partitions
     gparted
 
+    # Music
+    spotify
+
+    # Sharing
+    dropbox
+    syncthing
   ];
 }

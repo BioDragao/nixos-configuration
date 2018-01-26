@@ -15,7 +15,7 @@ Press F12 during the boot sequence and choose the USB Drive: the NixOS installer
 
 ## Formatting the host disk *(source: https://chris-martin.org/2015/installing-nixos)*
 
-![disklayout](https://github.com/jchapuis/nixos-configuration/disklayout.png)
+![disklayout](https://github.com/jchapuis/nixos-configuration/raw/master/disklayout.png)
 
 There are three partitions:
 
