@@ -11,7 +11,6 @@
       ./basics
       ./apps
       ./dev
-      ./users.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
