@@ -18,8 +18,8 @@
     gptfdisk 
     # process watch
     htop
-    # data processing 
-    sed awk grep jq 
+    # json data processing 
+    jq 
     # list open files
     lsof 
     # A set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
