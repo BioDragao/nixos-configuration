@@ -112,6 +112,8 @@ Using full disk encryption with LUKS implies that we need to enter the password 
  boot.initrd.kernelModules = [ "xhci_hcd" "xhci_pci" "ahci" "hid_microsoft" "dm_mod" "usbhid" "ata_generic" "ehci_pci" ];
 ```
 
+*Important*: notice that the setting is `boot.initrd.kernelModules` (and not `boot.kernelModules`).
+
 ### If you reboot during this process
 After you’ve created the partitions and LVM volumes, here’s a recap of everything you need to set up when you boot from the install media again.
 
