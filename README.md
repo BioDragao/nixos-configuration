@@ -60,9 +60,17 @@ lvcreate -n root vg -l 100%FREE
 
 ### Format partitions
 ```
-mkfs.vfat -n BOOT /dev/sda2
+mkfs.vfat -n BOOT /dev/sdd2
 mkfs.ext4 -L root /dev/vg/root
 mkswap -L swap /dev/vg/swap
+```
+
+### Setup the wifi
+Disable the wpa_supplicant service that’s running, and run it yourself specifying the WPA credentials.
+
+```
+systemctl stop wpa_supplicant.service
+wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
 ```
 
 ## Installation
