@@ -32,10 +32,12 @@ Run `fdisk -l` to show available disks, and select the destination one (we'll re
 
 Use gdisk to create the partitions: `gdisk /dev/sdd`, and create a partition table that looks like this:
 
+```
 Number  Size        Code  Name
   1     1000.0 KiB  EF02  BIOS boot partition
   2     500.0 MiB   EF00  EFI System Partition
   3     <the rest>  8E00  Linux LVM
+```
 
 ### Set up the encrypted LUKS volume
 Initialize the encrypted partition:
