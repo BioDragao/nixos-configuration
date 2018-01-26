@@ -24,5 +24,7 @@
     lsof 
     # A set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
     psmisc 
+    # adjust screen brightness automatically
+    redshift
   ];
 }
