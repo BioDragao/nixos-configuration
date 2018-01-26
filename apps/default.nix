@@ -37,4 +37,12 @@
     dropbox
     syncthing
   ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    chromium = {
+      enablePepperFlash = true;
+      enablePepperPDF = true;
+    };
+  };
 }

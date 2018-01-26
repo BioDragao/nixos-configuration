@@ -27,4 +27,14 @@
     # adjust screen brightness automatically
     redshift
   ];
+
+  services.config = { 
+    redshift = {
+      enable = true;
+
+      # Lausanne
+      latitude = "46.516";
+      longitude = "6.63282";
+    };
+  };
 }

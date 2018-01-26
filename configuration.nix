@@ -29,13 +29,6 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Bern";
-  redshift = {
-      enable = true;
-
-      # Lausanne
-      latitude = "46.516";
-      longitude = "6.63282";
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
