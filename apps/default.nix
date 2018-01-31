@@ -9,6 +9,9 @@
     libreoffice
     # scribus
 
+    # Teaching
+    texlive.combined.scheme-full
+
     # Vector graphics
     inkscape
 
