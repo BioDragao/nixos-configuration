@@ -37,7 +37,7 @@
     spotify
 
     # Sharing
-    dropbox
+    dropbox-cli
     syncthing
   ];
 

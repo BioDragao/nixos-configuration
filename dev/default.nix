@@ -13,6 +13,9 @@
     # editors
     vscode 
     jetbrains.idea-community
+
+    # Python
+    python27Full
   ];
 
   virtualisation = {
